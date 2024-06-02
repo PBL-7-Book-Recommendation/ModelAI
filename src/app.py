@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from src.helper import *
+from helper import *
 import pathlib
 import os
 
