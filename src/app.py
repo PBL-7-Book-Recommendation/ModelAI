@@ -8,7 +8,13 @@ pathlib.PosixPath = pathlib.WindowsPath
 path_to_model = os.path.join(os.path.dirname(os.getcwd()), 'ModelAI/models/all_ratings_fit_30_5.pkl')
 learn = load_learner_from_path(path_to_model)
 
-@app.route('/recommend_book/<userID>', methods=['GET'])
+@app.route('/', methods=['GET'])
+def default_router(uerID):
+
+    a = 'hello'
+    return a
+
+@app.route('/recommend_book/<userID>', methods=['POST'])
 def recommend_books_for_user(userID):
     unrated_books_info = get_book_unrate(userID)
     index_list_book = get_index_book_recommend(unrated_books_info)
