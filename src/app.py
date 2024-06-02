@@ -5,7 +5,7 @@ from fastai.vision.all import *
 # import pathlib
 from operator import itemgetter
 
-
+app = Flask(__name__)
 # pathlib.PosixPath = pathlib.WindowsPath
 
 def read_file(path):
@@ -60,3 +60,6 @@ def recommend_books_list(book_weights, unrated_books_info):
     recommend = [b for (a,b) in sorted_books]
 
     return recommend
+
+if __name__ == '__main__':
+    app.run(debug=True)
