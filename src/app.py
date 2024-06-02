@@ -16,5 +16,10 @@ def recommend_books_for_user(userID):
     recommend_books = recommend_books_list(book_weights, unrated_books_info)
 
     return jsonify({"recommend_books": recommend_books})
+
+@app.route('/', methods=['GET'])
+def default_router():
+    a = 'hello'
+    return a
 if __name__ == '__main__':
     app.run(debug=True)
