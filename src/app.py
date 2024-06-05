@@ -21,5 +21,7 @@ def recommend_books_for_user(userID):
 def default_router():
     a = 'hello'
     return a
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
