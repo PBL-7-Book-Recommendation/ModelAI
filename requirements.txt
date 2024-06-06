@@ -10,7 +10,6 @@ scipy==1.12.0
 torchvision==0.17.2
 # bs4==0.0.1
 # torch==2.2.2
-Flask==2.0.1
 psycopg2-binary>=2.8.6
 Flask-Cors==3.0.10
 Werkzeug==2.0.1
