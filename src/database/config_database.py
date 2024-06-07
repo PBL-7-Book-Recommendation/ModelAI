@@ -4,7 +4,6 @@ from psycopg2.extras import RealDictCursor
 
 
 database_url = os.environ.get("DATABASE_URL")
-print('database_url',database_url)
 
 # Thông tin kết nối đến cơ sở dữ liệu
 DB_HOST = os.environ.get("DB_HOST", "default_host")

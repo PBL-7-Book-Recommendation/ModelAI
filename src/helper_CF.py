@@ -18,8 +18,8 @@ def read_file(path):
 all_ratings = read_file('src/data/all_ratings.csv')
 # all_ratings = read_file('ModelAI/data/all_ratings.csv')
 
-# books = read_file('src/data/book-average-rating-with-langcode-eng-only.csv')
-books = read_file('ModelAI/data/book-average-rating-with-langcode-eng-only.csv')
+books = read_file('src/data/book-average-rating-with-langcode-eng-only.csv')
+# books = read_file('ModelAI/data/book-average-rating-with-langcode-eng-only.csv')
 
 
 def load_learner_from_path(path_to_model):
@@ -44,7 +44,7 @@ def get_book_unrate(userId):
     return unrated_books_info
 
 def get_index_book_recommend(unrated_books_info):
-    book_titles = unrated_books_info['title']
+    book_titles = unrated_books_info['isbn']
     top_books_list = list(book_titles)
     title_to_idx = {title: idx for idx, title in enumerate(top_books_list)}
     item_idxs = [title_to_idx[title] for title in top_books_list]
@@ -59,7 +59,7 @@ def get_weights(learn, index_list_book):
 def recommend_books_list(book_weights, unrated_books_info):
     book_pca = book_weights.pca(3)
     fac0,fac1,fac2 = book_pca.t()
-    book_comp = [(f, i) for f,i in zip(fac0, unrated_books_info['title'])]
+    book_comp = [(f, i) for f,i in zip(fac0, unrated_books_info['isbn'])]
     sorted_books = sorted(book_comp, key=itemgetter(0), reverse=True)[:20]
     recommend = [b for (a,b) in sorted_books]
 
