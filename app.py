@@ -64,6 +64,6 @@ def recommend_books_for_user(userID):
 if __name__ == "__main__":
 
     # port = int(os.environ.get("PORT", 5000)) 
-    # port = os.getenv('FLASK_PORT', '3000')
-    # host = os.getenv('FLASK_HOST', '0.0.0.0')
-    app.run(debug=True)
+    port = os.getenv('FLASK_PORT', '5000')
+    host = os.getenv('FLASK_HOST', '0.0.0.0')
+    app.run(host=host, port=port, debug=True)
