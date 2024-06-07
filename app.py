@@ -66,6 +66,4 @@ if __name__ == "__main__":
     # port = int(os.environ.get("PORT", 5000)) 
     # port = os.getenv('FLASK_PORT', '3000')
     # host = os.getenv('FLASK_HOST', '0.0.0.0')
-    # print(port, 'port')
-    # print(host, 'host')
-    app.run(host=host, port=port, debug=True)
+    app.run(debug=True)
