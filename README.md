@@ -1,7 +1,3 @@
-run  !pip install -r requirement.txt before run notebook
-
-run python ./src/app.py
-
 ### Move to the project directory
 
 $cd \<project-directory\>
@@ -20,8 +16,5 @@ $pip install -r requirements.txt
 
 ### Run the project
 
-$python relativeAPI.py
+$python app.py
 
-### Open new Terminal & Port mapping by ngrok with flask port: 5000
-
-$ngrok http 5000
