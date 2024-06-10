@@ -15,11 +15,11 @@ def read_file(path):
 
 # file_path_data = os.path.join(os.path.dirname(os.getcwd()), 'ModelAI/data/all_ratings.csv')
 
-all_ratings = read_file('src/data/all_ratings.csv')
-# all_ratings = read_file('ModelAI/data/all_ratings.csv')
+# all_ratings = read_file('src/data/all_ratings.csv')
+all_ratings = read_file('ModelAI/data/all_ratings.csv')
 
-books = read_file('src/data/book-average-rating-with-langcode-eng-only.csv')
-# books = read_file('ModelAI/data/book-average-rating-with-langcode-eng-only.csv')
+# books = read_file('src/data/book-average-rating-with-langcode-eng-only.csv')
+books = read_file('ModelAI/data/book-average-rating-with-langcode-eng-only.csv')
 
 
 def load_learner_from_path(path_to_model):
