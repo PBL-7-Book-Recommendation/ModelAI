@@ -5,7 +5,6 @@ import os
 from src.helper_CF import *
 from src.helper_CB import *
 from src.helper_query import *
-import pathlib
 
 
 app = Flask(__name__)
@@ -18,10 +17,9 @@ cos_sim = np.load(
     allow_pickle=True,
 )
 
-pathlib.PosixPath = pathlib.WindowsPath
 
 # path_to_model_CF = os.path.join(os.path.dirname(os.getcwd()), './src/models/all_ratings_fit_30_5.pkl')
-path_to_model_CF = os.path.join(os.path.dirname(os.getcwd()), './ModelAI/models/all_ratings_fit_30_5.pkl')
+path_to_model_CF = os.path.join(project_root, 'models/all_ratings_fit_30_5.pkl')
 
 learn = load_learner_from_path(path_to_model_CF)
 

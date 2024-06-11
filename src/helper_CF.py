@@ -5,34 +5,33 @@ from fastai.vision.all import *
 # import pathlib
 from operator import itemgetter
 
-
-# pathlib.PosixPath = pathlib.WindowsPath
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def read_file(path):
-    file_path_data = os.path.join(os.path.dirname(os.getcwd()), path)
+    file_path_data = os.path.join(project_root, path)
     data_frame = pd.read_csv(file_path_data)
     return data_frame
 
 # file_path_data = os.path.join(os.path.dirname(os.getcwd()), 'ModelAI/data/all_ratings.csv')
 
 # all_ratings = read_file('src/data/all_ratings.csv')
-all_ratings = read_file('ModelAI/data/all_ratings.csv')
+all_ratings = read_file('data/all_ratings.csv')
 
 # books = read_file('src/data/book-average-rating-with-langcode-eng-only.csv')
-books = read_file('ModelAI/data/book-average-rating-with-langcode-eng-only.csv')
+books = read_file('data/book-average-rating-with-langcode-eng-only.csv')
 
 
 def load_learner_from_path(path_to_model):
-    file_path = os.path.join(os.path.dirname(os.getcwd()), path_to_model)
     # file_path = os.path.join(os.path.dirname(os.getcwd()), 'ModelAI/training/fastai/all_ratings')
-    # data = CollabDataLoaders.from_df(all_ratings, seed=42, pct_val=0.3,
-    #                              item_name="description",rating_name='Book-Rating',
-    #                              user_name='User-ID')
-    # learn = collab_learner(data, use_nn = True, y_range=(0, 10.5)
-    #                   #  ,loss_func=CrossEntropyLossFlat()
-    #                   #  ,metrics=[accuracy, mse]
-    #                    )
-    learn = load_learner(file_path)
+    data = CollabDataLoaders.from_df(all_ratings, seed=42, pct_val=0.3,
+                                 item_name="description",rating_name='Book-Rating',
+                                 user_name='User-ID')
+    learn = collab_learner(data, use_nn = True, y_range=(0, 10.5)
+                      #  ,loss_func=CrossEntropyLossFlat()
+                      #  ,metrics=[accuracy, mse]
+                       )
+    learn = load_learner(path_to_model)
+    
     return learn
 
 def get_book_unrate(userId):
