@@ -1,6 +1,19 @@
 from .database import config_database
 
-books_query = """
+def get_interactions_by_userid(user_id):
+    interactions_query = """
+    SELECT
+        i.book_id
+    FROM interaction i
+    WHERE i.user_id = %s
+    """
+    result = config_database.query_db(interactions_query, (user_id,))
+    book_ids = [row['book_id'] for row in result]
+    print(book_ids,'rated')
+    return book_ids
+
+def get_books_by_ids(recommend_books):
+    books_query = """
     SELECT
         b.id,
         b.title,
@@ -17,23 +30,22 @@ books_query = """
                     'id', a.id,
                     'name', a.name,
                     'avatar', a.avatar
+                    )
                 )
-            )
-        ) AS authors
-    FROM book b
-    LEFT JOIN author_to_book atb ON b.id = atb.book_id
-    LEFT JOIN author a ON atb.author_id = a.id
-    WHERE b.id = ANY(%s)
-    GROUP BY b.id
-"""
+            ) AS authors
+        FROM book b
+        LEFT JOIN author_to_book atb ON b.id = atb.book_id
+        LEFT JOIN author a ON atb.author_id = a.id
+        WHERE b.id = ANY(%s)
+        GROUP BY b.id
+    """
 
-sources_query = """
-    SELECT id, name
-    FROM source
-    WHERE id = ANY(%s)
-"""
-
-interactions_query = """
+    sources_query = """
+        SELECT id, name
+        FROM source
+        WHERE id = ANY(%s)
+    """
+    interactions_query = """
     SELECT
         i.book_id,
         json_agg(
@@ -41,14 +53,12 @@ interactions_query = """
                 'user_id', i.user_id,
                 'type', i.type,
                 'value', i.value
-            )
-        ) AS interactions
-    FROM interaction i
-    WHERE i.book_id = ANY(%s)
-    GROUP BY i.book_id
-"""
-
-def get_books_by_ids(recommend_books):
+                )
+            ) AS interactions
+        FROM interaction i
+        WHERE i.book_id = ANY(%s)
+        GROUP BY i.book_id
+    """
 
     # Truy vấn thông tin sách và tác giả từ cơ sở dữ liệu
     books = config_database.query_db(books_query, (recommend_books,))
